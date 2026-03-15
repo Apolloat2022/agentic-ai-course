@@ -26,12 +26,12 @@ export const HeroBento = () => {
                         <h1 className="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter mb-6">
                             Master the Art of <br />
                             <span className="bg-gradient-to-br from-white via-indigo-200 to-cyan-400 bg-clip-text text-transparent">
-                                Prompt Engineering
+                                Agentic AI
                             </span>
                         </h1>
 
                         <p className="text-lg text-gray-400 leading-relaxed max-w-xl mb-10">
-                            The comprehensive curriculum for developers, product managers, and decision makers. Learn to orchestrate intelligent agent behaviors.
+                            The comprehensive curriculum for developers, product managers, and decision makers. Learn to build autonomous AI agents and multi-agent systems.
                         </p>
 
                         <div className="flex flex-wrap gap-4">

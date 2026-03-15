@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export const TerminalPreview = () => {
-    const text = 'PROMPT: "Design a futuristic UI for an AI academy"';
+    const text = '$ PROMPT: "Design a multi-agent system for autonomous customer support"';
     const [displayedText, setDisplayedText] = useState("");
 
     useEffect(() => {

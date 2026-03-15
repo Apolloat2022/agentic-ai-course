@@ -3,14 +3,14 @@
 import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useSession, signIn } from 'next-auth/react';
+import { useUser } from '@clerk/nextjs';
 
 import { level2Curriculum } from '../../../../../data/curriculum';
 import { useProgress } from '../../../../../hooks/useProgress';
 
 export default function ModulePlayerL2({ params }: { params: Promise<{ moduleId: string }> }) {
     const router = useRouter();
-    const { data: session, status } = useSession();
+    const { isLoaded, isSignedIn } = useUser();
     const resolvedParams = React.use(params);
     const activeModuleId = resolvedParams.moduleId;
     const { saveProgress, isModuleCompleted, getModuleScore } = useProgress();
@@ -28,8 +28,8 @@ export default function ModulePlayerL2({ params }: { params: Promise<{ moduleId:
     const [passed, setPassed] = useState(false);
 
     // Authentication Derived State
-    const isAuthenticated = status === "authenticated";
-    const isLoading = status === "loading";
+    const isAuthenticated = isLoaded && isSignedIn;
+    const isLoading = !isLoaded;
 
     // Progress
     const isCompleted = isModuleCompleted(activeModuleId) || passed;
@@ -138,7 +138,7 @@ export default function ModulePlayerL2({ params }: { params: Promise<{ moduleId:
                     <h1 className="text-xl font-bold truncate">{activeModule.title} <span className="text-purple-500 ml-2 text-sm uppercase tracking-wider border border-purple-500/30 px-2 py-0.5 rounded">Agentic</span></h1>
                     <div className="flex items-center gap-4">
                         {!isAuthenticated && (
-                            <button onClick={() => signIn()} className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg text-sm font-bold shadow-lg shadow-purple-500/20">Login to Track</button>
+                            <button onClick={() => router.push('/sign-in')} className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg text-sm font-bold shadow-lg shadow-purple-500/20">Login to Track</button>
                         )}
                         {isAuthenticated && activeModule.quiz && !passed && !showQuiz && !isPassed && (
                             <button onClick={startQuiz} className="px-4 py-2 rounded-lg bg-pink-500/10 text-pink-400 border border-pink-500/20 text-sm font-medium hover:bg-pink-500/20 transition-colors">

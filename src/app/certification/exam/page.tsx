@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@clerk/nextjs';
 import { redirect, useRouter } from 'next/navigation';
 import { finalExamQuestions, FinalExamQuestion } from '../../../data/final-exam';
 import { useProgress } from '../../../hooks/useProgress';
@@ -11,20 +11,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 const QUESTIONS_PER_PAGE = 10;
 
 export default function FinalExamPage() {
-    const { data: session, status } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect('/login');
-        },
-    });
-
+    const { user, isLoaded, isSignedIn } = useUser();
     const router = useRouter();
+
+    useEffect(() => {
+        if (isLoaded && !isSignedIn) {
+            redirect('/sign-in');
+        }
+    }, [isLoaded, isSignedIn]);
+
     const { saveFinalExamScore } = useProgress();
 
     const [currentPage, setCurrentPage] = useState(0);
     const [answers, setAnswers] = useState<Record<number, number>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [examResult, setExamResult] = useState<{ score: number; passed: boolean } | null>(null);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const totalPages = Math.ceil(finalExamQuestions.length / QUESTIONS_PER_PAGE);
     const currentQuestions = finalExamQuestions.slice(
@@ -62,7 +68,8 @@ export default function FinalExamPage() {
         setIsSubmitting(false);
     };
 
-    if (status === 'loading') return <div className="min-h-screen flex items-center justify-center text-white">Loading...</div>;
+    if (!isLoaded || !mounted) return <div className="min-h-screen flex items-center justify-center text-white">Loading...</div>;
+    if (!isSignedIn) return null;
 
     if (examResult) {
         return (
@@ -86,12 +93,12 @@ export default function FinalExamPage() {
                         {examResult.passed ? (
                             <div className="space-y-4">
                                 <p className="text-gray-300">
-                                    You have officially earned the **Prompt Engineering Professional Certification**.
+                                    You have officially earned the **Agentic AI Professional Certification**.
                                     Your digital certificate is now available.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                     <button
-                                        onClick={() => router.push(`/certificate?course=Professional Certification&id=PROF-${session?.user?.name?.split(' ').join('-').toUpperCase()}`)}
+                                        onClick={() => router.push(`/certificate?course=Professional Certification&id=PROF-${user?.firstName?.toUpperCase()}`)}
                                         className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl font-bold hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
                                     >
                                         View Certificate

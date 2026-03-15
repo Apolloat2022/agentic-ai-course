@@ -1,13 +1,12 @@
 import { prisma } from "../../../lib/prisma";
-import { getServerSession } from "next-auth";
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { authOptions } from "../../../lib/auth";
 
 export default async function AdminUsersPage() {
-    const session = await getServerSession(authOptions);
+    const { userId } = await auth();
 
-    if (!session) {
-        redirect("/login?callbackUrl=/admin/users");
+    if (!userId) {
+        redirect("/sign-in?redirect_url=/admin/users");
     }
 
     // Fetch all users
@@ -29,7 +28,7 @@ export default async function AdminUsersPage() {
                                 <th className="p-6">User</th>
                                 <th className="p-6">Email</th>
                                 <th className="p-6">Joined</th>
-                                <th className="p-6">Provider</th>
+                                <th className="p-6">Provider (Clerk)</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
@@ -39,15 +38,15 @@ export default async function AdminUsersPage() {
                                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-sm">
                                             {user.name ? user.name[0].toUpperCase() : "?"}
                                         </div>
-                                        <span className="font-bold">{user.name || "Unknown"}</span>
+                                        <span className="font-bold">{user.name || "Student"}</span>
                                     </td>
-                                    <td className="p-6 text-gray-300">{user.email}</td>
+                                    <td className="p-6 text-gray-300">{user.email || "No email stored"}</td>
                                     <td className="p-6 text-gray-400 text-sm">
                                         {new Date(user.createdAt).toLocaleDateString()}
                                     </td>
                                     <td className="p-6">
                                         <span className="px-3 py-1 bg-white/10 rounded-full text-xs font-mono">
-                                            {user.accounts[0]?.provider || "google"}
+                                            clerk_oauth
                                         </span>
                                     </td>
                                 </tr>

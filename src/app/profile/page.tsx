@@ -1,18 +1,19 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { useProgress } from '../../hooks/useProgress';
 
 export default function ProfilePage() {
-    const { data: session, status } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect('/login');
-        },
-    });
+    const { user, isLoaded, isSignedIn } = useUser();
+
+    useEffect(() => {
+        if (isLoaded && !isSignedIn) {
+            redirect('/sign-in');
+        }
+    }, [isLoaded, isSignedIn]);
 
     const { progress, getModuleScore } = useProgress();
     const [mounted, setMounted] = useState(false);
@@ -21,9 +22,11 @@ export default function ProfilePage() {
         setMounted(true);
     }, []);
 
-    if (status === 'loading' || !mounted) {
+    if (!isLoaded || !mounted) {
         return <div className="min-h-screen flex items-center justify-center text-white">Loading...</div>;
     }
+    
+    if (!isSignedIn) return null;
 
     // Calculate Stats
     const completedCount = progress.completedModules.length;
@@ -35,10 +38,10 @@ export default function ProfilePage() {
     let rank = "Novice";
     if (completedCount >= 3) rank = "Apprentice";
     if (completedCount >= 5) rank = "Practitioner";
-    if (completedCount >= 8) rank = "Prompt Engineer";
+    if (completedCount >= 8) rank = "Agent Orchestrator";
 
-    const userInitials = session?.user?.name
-        ? session.user.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2)
+    const userInitials = user?.firstName
+        ? user.firstName.substring(0, 2).toUpperCase()
         : "US";
 
     return (
@@ -60,8 +63,8 @@ export default function ProfilePage() {
 
                         {/* User Info */}
                         <div className="text-center md:text-left flex-1">
-                            <h1 className="text-3xl font-bold mb-2">{session?.user?.name}</h1>
-                            <p className="text-gray-400 mb-4">{session?.user?.email}</p>
+                            <h1 className="text-3xl font-bold mb-2">{user?.fullName || "Student"}</h1>
+                            <p className="text-gray-400 mb-4">{user?.primaryEmailAddress?.emailAddress}</p>
 
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm">
                                 <span className="text-cyan-400">Rank:</span>
@@ -148,7 +151,7 @@ export default function ProfilePage() {
                                         <span className="text-cyan-400 font-bold text-sm tracking-tighter">CERTIFIED</span>
                                         <span className="text-2xl">🎓</span>
                                     </div>
-                                    <h3 className="font-bold text-white group-hover:text-cyan-400 transition-colors">AI Communication Fundamentals</h3>
+                                    <h3 className="font-bold text-white group-hover:text-cyan-400 transition-colors">Agentic AI Fundamentals</h3>
                                     <p className="text-xs text-gray-500 mt-2">Level 1 Achievement</p>
                                 </Link>
                             )}
@@ -163,7 +166,7 @@ export default function ProfilePage() {
                                         <span className="text-indigo-400 font-bold text-sm tracking-tighter">PROFESSIONAL</span>
                                         <span className="text-2xl">🏆</span>
                                     </div>
-                                    <h3 className="font-bold text-white group-hover:text-indigo-400 transition-colors">Prompt Engineering Professional</h3>
+                                    <h3 className="font-bold text-white group-hover:text-indigo-400 transition-colors">Agentic AI Professional</h3>
                                     <p className="text-xs text-gray-400 mt-2">Score: {progress.finalExamScore}%</p>
                                 </Link>
                             )}

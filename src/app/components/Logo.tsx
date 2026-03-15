@@ -58,7 +58,7 @@ export const Logo = () => {
                         Apollo Technologies
                     </span>
                     <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-white to-cyan-400 bg-clip-text text-transparent">
-                        Prompt Engineering
+                        Agentic AI
                     </span>
                 </div>
             </a>

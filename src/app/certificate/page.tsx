@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, Suspense } from 'react';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@clerk/nextjs';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Great_Vibes, Dancing_Script, Pinyon_Script } from 'next/font/google';
@@ -11,12 +11,12 @@ const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'
 const pinyon = Pinyon_Script({ subsets: ['latin'], weight: ['400'] });
 
 function CertificateContent() {
-    const { data: session } = useSession();
+    const { user } = useUser();
     const searchParams = useSearchParams();
     const [date, setDate] = useState('');
 
-    const courseName = searchParams.get('course') || 'Prompt Engineering Level 1';
-    const certificateId = searchParams.get('id') || "AP-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+    const courseName = searchParams.get('course') || 'Agentic AI Level 1';
+    const certificateId = searchParams.get('id') || "AIA-" + Math.random().toString(36).substr(2, 9).toUpperCase();
 
     useEffect(() => {
         setDate(new Date().toLocaleDateString('en-US', {
@@ -27,7 +27,7 @@ function CertificateContent() {
     }, []);
 
     const handlePrint = () => window.print();
-    const studentName = session?.user?.name || "Apollo Technologies US";
+    const studentName = user?.fullName || "Student";
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4 print:p-0 print:bg-white text-black">
@@ -66,7 +66,7 @@ function CertificateContent() {
 
                     {/* Buildfolio - NOT changed, kept at original position */}
                     <div className="text-right mt-4">
-                        <h2 className="text-2xl font-bold tracking-widest text-[#1e3a8a]">BUILDFOLIO</h2>
+                        <h2 className="text-2xl font-bold tracking-widest text-[#1e3a8a]">APOLLO</h2>
                         <p className="text-[10px] uppercase tracking-[0.2em] text-[#ca8a04]">Official Certification</p>
                     </div>
                 </div>
@@ -96,15 +96,15 @@ function CertificateContent() {
                     </h2>
 
                     <div className="max-w-2xl text-sm text-gray-600 mb-4 leading-relaxed">
-                        Demonstrating high proficiency in <span className="font-semibold text-[#1e3a8a]">Generative AI Communication</span>,
-                        <span className="font-semibold text-[#1e3a8a]"> Prompt Design Strategy</span>, and
-                        <span className="font-semibold text-[#1e3a8a]"> Applied LLM Problem Solving</span>.
-                        The recipient has proven their ability to effectively leverage AI tools for professional applications.
+                        Demonstrating high proficiency in <span className="font-semibold text-[#1e3a8a]">Autonomous Agent Systems</span>,
+                        <span className="font-semibold text-[#1e3a8a]"> ReAct Tool Execution</span>, and
+                        <span className="font-semibold text-[#1e3a8a]"> Multi-Agent Orchestration</span>.
+                        The recipient has proven their ability to build robust reasoning loops effectively.
                     </div>
 
                     {/* Skill Badges */}
                     <div className="flex gap-2 flex-wrap justify-center mb-8">
-                        {['Prompt Engineering', 'Zero-Shot Reasoning', 'Chain-of-Thought', 'System Design'].map(skill => (
+                        {['ReAct Pattern', 'Tool Calling', 'Vector Memory', 'Graph Workflows'].map(skill => (
                             <span key={skill} className="px-3 py-1 bg-gray-50 border border-gray-200 text-gray-600 text-[10px] font-bold uppercase tracking-wider rounded-sm shadow-sm">
                                 {skill}
                             </span>
@@ -148,7 +148,7 @@ function CertificateContent() {
 
                 {/* Bottom Verification - Moved up slightly to be inside certificate */}
                 <div className="absolute bottom-1 left-0 right-0 text-center text-[8px] text-gray-400 z-30 font-mono">
-                    ID: {certificateId} &bull; AUTHENTICITY VERIFIED BY APOLLO TECHNOLOGIES &bull; BUILDFOLIO STANDARD
+                    ID: {certificateId} &bull; AUTHENTICITY VERIFIED BY APOLLO TECHNOLOGIES &bull; AI STANDARD
                 </div>
             </div>
         </div>

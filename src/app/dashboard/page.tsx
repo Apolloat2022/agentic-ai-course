@@ -1,19 +1,20 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { level1Curriculum, level2Curriculum } from '../../data/curriculum';
 import { useProgress } from '../../hooks/useProgress';
 
 export default function Dashboard() {
-    const { data: session, status } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect('/login');
-        },
-    });
+    const { user, isLoaded, isSignedIn } = useUser();
+
+    useEffect(() => {
+        if (isLoaded && !isSignedIn) {
+            redirect('/sign-in');
+        }
+    }, [isLoaded, isSignedIn]);
 
     const { progress, isModuleCompleted } = useProgress();
     const [mounted, setMounted] = useState(false);
@@ -22,9 +23,11 @@ export default function Dashboard() {
         setMounted(true);
     }, []);
 
-    if (status === 'loading' || !mounted) {
+    if (!isLoaded || !mounted) {
         return <div className="min-h-screen flex items-center justify-center text-white">Loading...</div>;
     }
+
+    if (!isSignedIn) return null; // Prevent flicker while redirecting
 
     // Calculate Level 1 Progress
     const totalModulesL1 = level1Curriculum.weeks.flatMap(w => w.modules).length;
@@ -42,9 +45,9 @@ export default function Dashboard() {
                 <div className="flex items-end justify-between mb-12">
                     <div>
                         <h1 className="text-5xl font-bold mb-2">
-                            Welcome back, <Link href="/profile" className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue to-purple-500 hover:opacity-80 transition-opacity">{session?.user?.name}</Link>
+                            Welcome back, <Link href="/profile" className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue to-purple-500 hover:opacity-80 transition-opacity">{user?.firstName || "Student"}</Link>
                         </h1>
-                        <p className="text-gray-400 text-lg">Ready to continue your journey into AI mastery?</p>
+                        <p className="text-gray-400 text-lg">Ready to continue your journey into multi-agent mastery?</p>
                     </div>
 
                     {/* Resume Learning Quick Action */}
@@ -56,7 +59,7 @@ export default function Dashboard() {
                             <div className="text-left">
                                 <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest">Resume Learning</div>
                                 <div className="text-sm font-bold text-white group-hover:text-cyan-400">
-                                    {level1Curriculum.weeks.flatMap(w => w.modules).find(m => !isModuleCompleted(m.id))?.title || "1.1 LLM Perspective"}
+                                    {level1Curriculum.weeks.flatMap(w => w.modules).find(m => !isModuleCompleted(m.id))?.title || "1.1 What is an AI Agent?"}
                                 </div>
                             </div>
                             <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
@@ -92,7 +95,7 @@ export default function Dashboard() {
                         </div>
 
                         <p className="text-sm text-gray-400 mb-6 line-clamp-2">
-                            Master the core principles of prompt engineering, from zero-shot to chain-of-thought reasoniong.
+                            Master the core principles of intelligent agents, from autonomous setups to Tool Use.
                         </p>
 
                         <a href="/courses/level-1" className="flex items-center justify-between w-full py-3 px-4 bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-500/20 text-cyan-400 font-bold rounded-xl hover:from-cyan-500 hover:to-blue-600 hover:text-white transition-all group-hover:shadow-lg group-hover:shadow-cyan-500/20">
@@ -128,7 +131,7 @@ export default function Dashboard() {
                         </div>
 
                         <p className="text-sm text-gray-400 mb-6 line-clamp-2">
-                            Build autonomous agents and RAG pipelines. Learn to orchestrate complex AI behaviors.
+                            Build autonomous agents, workflows, and multi-agent orchestrations.
                         </p>
 
                         <a href="/courses/level-2" className="flex items-center justify-between w-full py-3 px-4 bg-gradient-to-r from-purple-500/10 to-pink-600/10 border border-purple-500/20 text-purple-400 font-bold rounded-xl hover:from-purple-500 hover:to-pink-600 hover:text-white transition-all group-hover:shadow-lg group-hover:shadow-purple-500/20">
@@ -153,15 +156,15 @@ export default function Dashboard() {
                             Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Certification</span>
                         </h2>
                         <p className="text-lg text-indigo-200/60 max-w-2xl mb-8 leading-relaxed">
-                            Validate your expertise with our rigorous 100-question final examination.
-                            Achievement awards you the **Prompt Engineering Professional Certification** (PEPC)
+                            Validate your expertise with our rigorous final examination.
+                            Achievement awards you the **Agentic AI Professional Certification** (AIPC)
                             and unlocks premium community features.
                         </p>
 
                         <div className="flex flex-wrap gap-6 mb-8">
                             <div className="flex items-center gap-2 text-indigo-300">
                                 <span className="text-xl">📊</span>
-                                <span className="font-mono text-sm underline underline-offset-4 decoration-indigo-500/30">100 Multiple Choice</span>
+                                <span className="font-mono text-sm underline underline-offset-4 decoration-indigo-500/30">Comprehensive Selection</span>
                             </div>
                             <div className="flex items-center gap-2 text-indigo-300">
                                 <span className="text-xl">⏱️</span>
@@ -197,7 +200,7 @@ export default function Dashboard() {
             </div>
 
             {/* Student Resources Section */}
-            <div className="mt-16">
+            <div className="mt-16 mb-24">
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
                     <span className="w-2 h-8 bg-cyan-500 rounded-full"></span>
                     Student Resources

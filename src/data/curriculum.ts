@@ -29,189 +29,97 @@ export interface CourseData {
 }
 
 export const level1Curriculum: CourseData = {
-    title: "AI Communication Fundamentals",
+    title: "Introduction to Agentic AI",
     level: "Beginner",
     weeks: [
         {
             id: 1,
-            title: "Week 1: The AI Mindset",
+            title: "Week 1: Agent Concepts",
             modules: [
                 {
                     id: "1.1",
-                    title: "1.1 LLM Perspective",
+                    title: "1.1 What is an AI Agent?",
                     type: "video",
                     duration: "45m",
-                    videoUrl: "https://www.youtube.com/embed/5sLYAQS9sWQ", // How Large Language Models Work
-                    description: "Understanding Large Language Models (LLMs) requires shifting your perspective from 'searching' to 'instructing'. In this module, we dissect how LLMs process information through tokenization and next-word prediction, demystifying the 'black box' of AI. We cover the fundamentals of how models 'think' and process inputs.",
+                    videoUrl: "https://www.youtube.com/embed/5sLYAQS9sWQ", 
+                    description: "Understanding the shift from static LLMs to autonomous capable AI. We cover the foundational transition from answering questions to executing multi-step intelligent behaviors.",
                     useCases: [
-                        "Explaining AI limitations to stakeholders",
-                        "Debugging unexpected model outputs",
-                        "Designing constraints for business applications"
+                        "Explaining agentic systems to stakeholders",
+                        "Distinguishing between chatbots and agents",
+                        "Designing use cases for autonomous task execution"
                     ],
                     quiz: [
-                        { id: 1, text: "What represents the 'knowledge' in an LLM?", options: ["The internet connection", "The parameters (weights) learned during training", "A SQL database", "The user's input"], correct: 1 },
-                        { id: 2, text: "LLMs are fundamentally prediction engines for what?", options: ["Stock prices", "Next tokens (words)", "Weather", "Truth"], correct: 1 },
-                        { id: 3, text: "Do LLMs 'understand' text like humans?", options: ["Yes, exactly like humans", "No, they process statistical patterns", "Yes, they have consciousness", "Only if paid"], correct: 1 },
-                        { id: 4, text: "What is 'Pre-training'?", options: ["Learning from massive datasets", "Learning from user feedback", "The time before training", "Installing Python"], correct: 0 },
-                        { id: 5, text: "Can LLMs hallucinate?", options: ["No, never", "Yes, they can generate confident falsehoods", "Only on outdated hardware", "Only in zero-shot mode"], correct: 1 }
+                        { id: 1, text: "What defines an AI Agent?", options: ["A static database", "An LLM that can reason, observe, and take actions", "A text generator", "An image creator"], correct: 1 },
+                        { id: 2, text: "Which component gives an agent ability to interact with the world?", options: ["Weights", "Tools/Functions", "Cost", "CSS"], correct: 1 },
+                        { id: 3, text: "Do agents require a human to trigger every step?", options: ["Yes, always", "No, they operate autonomously through loops", "Yes, for safety", "Only via API"], correct: 1 },
+                        { id: 4, text: "What is autonomy in the context of Agents?", options: ["Deciding the next action based on previous results without human intervention", "Running forever", "Hacking", "Generating long text"], correct: 0 },
+                        { id: 5, text: "Can agents fail?", options: ["No, never", "Yes, they can fall into infinite loops or hallucinate actions", "Only on outdated hardware", "Only without tools"], correct: 1 }
                     ]
                 },
                 {
                     id: "1.2",
-                    title: "1.2 First Contact",
+                    title: "1.2 The ReAct Pattern",
                     type: "video",
-                    duration: "15m",
+                    duration: "25m",
                     videoUrl: "https://www.youtube.com/embed/yFMVT3bcrJo",
-                    description: "Your first interaction with an LLM sets the tone for future success. This module covers the foundational syntax of effective prompting, the importance of clarity, and how to avoid the 'Garbage In, Garbage Out' trap. Featuring Liam Ottley's guide to getting started.",
+                    description: "Learn the core ReAct (Reasoning and Acting) pattern. Discover how agents maintain an internal monologue to decide which tools to use and how to evaluate their observations.",
                     useCases: [
-                        "Writing your first effective email drafter",
-                        "Summarizing complex meeting notes",
-                        "Translating natural language to code"
+                        "Building a multi-step research agent",
+                        "Debugging logic loops in LLMs",
+                        "Implementing basic autonomy in code"
                     ],
                     quiz: [
-                        { id: 1, text: "What is the primary role of a Prompt Engineer?", options: ["To fix computers", "To craft inputs that guide AI effectively", "To write Python code", "To manage servers"], correct: 1 },
-                        { id: 2, text: "Which approach usually yields better results?", options: ["Vague questions", "Specific, structured instructions", "One word prompts", "Asking politely only"], correct: 1 },
-                        { id: 3, text: "What is 'Iterative Prompting'?", options: ["Asking once and giving up", "Refining the prompt based on output until success", "Repeating the same prompt", "Auto-looping"], correct: 1 },
-                        { id: 4, text: "Why is English often called the 'new programming language'?", options: ["It isn't", "Because we prompt models in natural language", "Because Python is dead", "Because compilers speak English"], correct: 1 },
-                        { id: 5, text: "Is the first output always the best?", options: ["Yes, AI is perfect", "No, refinement is often needed", "Only for GPT-4", "Depends on the weather"], correct: 1 }
+                        { id: 1, text: "What is the ReAct pattern?", options: ["A UI library", "Reasoning + Acting over observations", "Reaction time testing", "A database system"], correct: 1 },
+                        { id: 2, text: "In ReAct, what is an 'Observation'?", options: ["Looking at the screen", "The result returned from executing a specific tool/action", "A random thought", "User input"], correct: 1 },
+                        { id: 3, text: "What comes before 'Action' in the ReAct loop?", options: ["Observation", "Thought (Reasoning)", "Error", "Completion"], correct: 1 },
+                        { id: 4, text: "Why is the ReAct loop powerful?", options: ["It saves tokens", "It grounds the LLM in reality by allowing it to use external tools to verify information before answering", "It makes text shorter", "It is old"], correct: 1 },
+                        { id: 5, text: "When does the ReAct loop stop?", options: ["Never", "When the agent decides it has reached the final answer", "After 1 step", "When the user clicks stop"], correct: 1 }
                     ]
                 }
             ]
         },
         {
             id: 2,
-            title: "Week 2: Core Principles",
+            title: "Week 2: Memory & Tools",
             modules: [
                 {
                     id: "2.1",
-                    title: "2.1 Anatomy of a Prompt",
+                    title: "2.1 Agent State Management",
                     type: "video",
-                    duration: "29m",
-                    videoUrl: "https://www.youtube.com/embed/Dep2-Rtl4Ow", // Anatomy of perfect prompting
-                    description: "A professional prompt isn't just a sentence; it's a structured object. We break down the four key components: Instruction, Context, Input Data, and Output Indicator. We explore James Briggs' detailed breakdown of prompt structure and few-shot training techniques.",
+                    duration: "30m",
+                    videoUrl: "https://www.youtube.com/embed/Dep2-Rtl4Ow", 
+                    description: "Agents need memory to keep track of their progress across multiple reasoning steps. We explore short-term context windows versus long-term vector database storage.",
                     useCases: [
-                        "Creating reusable prompt templates for teams",
-                        "Standardizing AI outputs for software integration",
-                        "Reducing token usage while maintaining quality"
+                        "Creating agents that remember past conversations",
+                        "Implementing state machines for complex workflows",
+                        "Managing context window limits"
                     ],
                     quiz: [
-                        { id: 1, text: "Which element sets the AI's behavior?", options: ["Context", "Persona / Role", "Task", "Output Format"], correct: 1 },
-                        { id: 2, text: "Why include 'Output Format' in a prompt?", options: ["To confuse the AI", "To ensure the response structure matches your needs (e.g., Table, List)", "To save tokens", "To make it look cool"], correct: 1 },
-                        { id: 3, text: "What does 'Context' provide?", options: ["The goal", "Background information to constrain the solution space", "The output", "The format"], correct: 1 },
-                        { id: 4, text: "If you want a 50-word summary, which component is that?", options: ["Constraint", "Persona", "Context", "Input Data"], correct: 0 },
-                        { id: 5, text: "Are all components required for every prompt?", options: ["Yes, strict rule", "No, but they help complexity", "No, only specific ones exist", "Only context matters"], correct: 1 }
+                        { id: 1, text: "How do you manage agent memory?", options: ["By rebooting", "By providing conversational history and external database references (RAG) in the state", "By saving a file", "By deleting old messages"], correct: 1 },
+                        { id: 2, text: "What is Short-Term Memory for an agent?", options: ["A hard drive", "The current context window history of thoughts and actions", "A flash drive", "Cache"], correct: 1 },
+                        { id: 3, text: "What is Long-Term Memory for an agent?", options: ["The database", "External storage like Vector DBs accessed via tools", "The RAM", "The CPU"], correct: 1 },
+                        { id: 4, text: "Why does state management matter?", options: ["It doesn't", "It prevents the agent from repeating actions or losing track of its goal", "It looks cool", "It saves electricity"], correct: 1 },
+                        { id: 5, text: "Can agents summarize their own memory to save tokens?", options: ["No", "Yes, memory consolidation is a common pattern", "Only for images", "Only using Python"], correct: 1 }
                     ]
                 },
                 {
                     id: "2.2",
-                    title: "2.2 Essential Patterns",
-                    type: "video",
-                    duration: "25m",
-                    videoUrl: "https://www.youtube.com/embed/Fp-ue4UCE3s", // Chain of Thought Prompting
-                    description: "Design patterns aren't just for software code. We explore the 'Persona', 'Recipe', and 'Chain of Thought' patterns—proven strategies to unlock higher reasoning capabilities in models like GPT-4 and Claude. This lesson covers the advanced techniques from the Prompt Engineering Guide.",
-                    useCases: [
-                        "Simulating expert consultants (e.g., Legal, Medical)",
-                        "Generating complex, step-by-step tutorials",
-                        "Solving math or logic puzzles with high accuracy"
-                    ],
-                    quiz: [
-                        { id: 1, text: "The 'Persona Pattern' uses which key instruction?", options: ["Act as...", "Write a...", "Translate to...", "Summarize..."], correct: 0 },
-                        { id: 2, text: "The 'Recipe Pattern' is best for?", options: ["Food", "Generative step-by-step procedures", "Writing poems", "Coding"], correct: 1 },
-                        { id: 3, text: "What does 'Chain of Thought' encourage?", options: ["Speed", "Reasoning transparency", "Short answers", "Randomness"], correct: 1 },
-                        { id: 4, text: "In the 'Flipped Interaction' pattern, who asks the questions?", options: ["The User", "The AI", "The Developer", "Nobody"], correct: 1 },
-                        { id: 5, text: "Why use patterns?", options: ["To memorize names", "To standardize effective strategies for recurring problems", "They are mandatory", "To avoid typing"], correct: 1 }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 3,
-            title: "Week 3: IT Management",
-            modules: [
-                {
-                    id: "3.1",
-                    title: "3.1 Tech Documentation",
-                    type: "video",
-                    duration: "30m",
-                    videoUrl: "https://www.youtube.com/embed/qBlX6FhDm2E", // Lance Cummings: Structured Content
-                    description: "Documentation is the backbone of IT. Learn how to use 'Structured Prompts' to generate high-quality technical documentation, API references, and user guides. We dive into Lance Cummings' methodologies for technical communication.",
-                    useCases: [
-                        "Auto-generating API documentation from code",
-                        "Creating user manuals from feature lists",
-                        "Standardizing commit messages and changelogs"
-                    ],
-                    quiz: [
-                        { id: 1, text: "What is the main benefit of structured prompts for documentation?", options: ["It's faster", "It ensures consistency and completeness", "It's cheaper", "It's fun"], correct: 1 },
-                        { id: 2, text: "Which component is crucial for technical docs?", options: ["Humor", "Context and Constraints", "Emojis", "Short sentences only"], correct: 1 },
-                        { id: 3, text: "Can AI update existing documentation?", options: ["No, only create new", "Yes, by providing the old doc and the changes", "Only if it wrote it", "Only in Python"], correct: 1 },
-                        { id: 4, text: "How do you ensure accuracy?", options: ["Trust the AI", "Human review and verification", "Ask twice", "Use GPT-5"], correct: 1 },
-                        { id: 5, text: "What format is best for technical prompts?", options: ["Paragraphs", "Markdown / Structured Data", "Audio", "Images"], correct: 1 }
-                    ]
-                },
-                {
-                    id: "3.2",
-                    title: "3.2 Problem-Solving",
+                    title: "2.2 Tool Use & Function Calling",
                     type: "video",
                     duration: "40m",
-                    videoUrl: "https://www.youtube.com/embed/SJqGYwRq0uc", // GitHub Copilot Debugging
-                    description: "Debugging and problem-solving are core IT skills. See how tools like GitHub Copilot and ChatGPT can act as an intelligent pair programmer, helping you diagnose errors, refactor code, and brainstorm architectural solutions.",
+                    videoUrl: "https://www.youtube.com/embed/Fp-ue4UCE3s", 
+                    description: "Learn how to endow an LLM with 'hands'. We will cover defining JSON schemas for function calling, letting your agent fetch live weather, stock prices, or query a database.",
                     useCases: [
-                        "Analyzing stack traces for root cause",
-                        "Refactoring legacy code to modern patterns",
-                        " brainstorming system architecture options"
+                        "Building agents that interact with APIs",
+                        "Executing code autonomously",
+                        "Writing dynamic dashboards"
                     ],
                     quiz: [
-                        { id: 1, text: "What is GitHub Copilot primarily used for?", options: ["Writing emails", "Code completion and assistance", "Video editing", "Social media"], correct: 1 },
-                        { id: 2, text: "How can AI help with debugging?", options: ["It fixes bugs automatically without asking", "It can explain error messages and suggest fixes", "It deletes the code", "It blames the user"], correct: 1 },
-                        { id: 3, text: "What is 'Rubber Ducking' with AI?", options: ["A game", "Explaining the problem to the AI to clarify your own thoughts", "Buying a toy", "Coding in the bath"], correct: 1 },
-                        { id: 4, text: "Should you paste sensitive keys into the AI?", options: ["Yes, it's safe", "No, never", "Only on Tuesdays", "If it asks nicely"], correct: 1 },
-                        { id: 5, text: "Can AI suggest performance optimizations?", options: ["No", "Yes, it can analyze complexity and suggest refactors", "Only for C++", "Only if you pay extra"], correct: 1 }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 4,
-            title: "Week 4: Implementation",
-            modules: [
-                {
-                    id: "4.1",
-                    title: "4.1 Critical Evaluation",
-                    type: "video",
-                    duration: "35m",
-                    videoUrl: "https://www.youtube.com/embed/4u64WEuQHYE", // AI Bias and Hallucinations
-                    description: "Trust but verify. Learn the critical skills of evaluating AI outputs for bias, hallucinations, and security vulnerabilities. We discuss bias detection, fact-checking strategies, and how to rigorously test your prompts before deployment.",
-                    useCases: [
-                        "Auditing AI for gender/racial bias",
-                        "Verifying factual claims against reliable sources",
-                        "Testing for prompt injection vulnerabilities"
-                    ],
-                    quiz: [
-                        { id: 1, text: "What is 'AI Hallucination'?", options: ["AI dreaming", "Confident but false generation", "AI seeing ghosts", "System crash"], correct: 1 },
-                        { id: 2, text: "Why is bias detection important?", options: ["To be politically correct", "To ensure fair and ethical outcomes", "To slow down development", "It's not important"], correct: 1 },
-                        { id: 3, text: "How do you test a prompt?", options: ["Run it once", "Run it with diverse inputs and edge cases", "Ask a friend", "Guess"], correct: 1 },
-                        { id: 4, text: "What is 'Red Teaming'?", options: ["Playing a game", "Adversarial testing to find flaws", "Writing code in red", "Marketing"], correct: 1 },
-                        { id: 5, text: "Can AI explain its own bias?", options: ["Always perfectly", "Sometimes, but often it's hidden in training data", "Never", "Only if asked nicely"], correct: 1 }
-                    ]
-                },
-                {
-                    id: "4.2",
-                    title: "4.2 Starter Toolkit",
-                    type: "video",
-                    duration: "45m",
-                    videoUrl: "https://www.youtube.com/embed/SeybVD0NMQI", // Building Your First AI Application
-                    description: "Ready to build? We review the essential tools and platforms for 2024. From end-to-end project examples to building your first AI application, this module gives you the starter toolkit to move from theory to practice.",
-                    useCases: [
-                        "Selecting the right LLM for your task",
-                        "Setting up a local development environment",
-                        "Deploying a simple AI wrapper app"
-                    ],
-                    quiz: [
-                        { id: 1, text: "What is the first step in building an AI app?", options: ["Writing code", "Defining the problem and use case", "Buying servers", "Designing a logo"], correct: 1 },
-                        { id: 2, text: "What is an API key?", options: ["A physical key", "A safe password", "A credential to access AI services programmatically", "A crypto token"], correct: 2 },
-                        { id: 3, text: "Do you always need a massive GPU?", options: ["Yes, always", "No, you can use cloud APIs", "Only for text", "No, CPU is enough for training"], correct: 1 },
-                        { id: 4, text: "What is a 'Wrapper' app?", options: ["Paper app", "An app that wraps a UI around an underlying AI model", "A candy app", "A slow app"], correct: 1 },
-                        { id: 5, text: "Why use a framework like LangChain?", options: ["To make it harder", "To abort mission", "To simplify chaining multiple AI calls and tools", "It's required by law"], correct: 2 }
+                        { id: 1, text: "What is tool use in agents?", options: ["Using a hammer", "Allowing the LLM to output structured JSON to trigger external code execution", "Typing fast", "Using keyboard shortcuts"], correct: 1 },
+                        { id: 2, text: "Who executes the tool?", options: ["The LLM weights", "The surrounding application runtime (e.g., Python/Node server) based on the LLM's structured output", "The user", "The cloud provider"], correct: 1 },
+                        { id: 3, text: "Why are Tool Schemas important?", options: ["For aesthetics", "They define exactly what arguments the function expects so the LLM can format its request correctly", "For pricing", "For speed"], correct: 1 },
+                        { id: 4, text: "Can an agent call multiple tools in parallel?", options: ["No, never", "Yes, modern models support parallel function calling", "Only on Sundays", "Only in Java"], correct: 1 },
+                        { id: 5, text: "What happens if a tool returns an error?", options: ["The agent crashes instantly", "The error is returned to the agent as an observation so it can correct its mistake", "The user is banned", "The database drops"], correct: 1 }
                     ]
                 }
             ]
@@ -220,149 +128,77 @@ export const level1Curriculum: CourseData = {
 };
 
 export const level2Curriculum: CourseData = {
-    title: "Agentic Workflows",
+    title: "Production Multi-Agent Systems",
     level: "Intermediate",
     weeks: [
         {
             id: 1,
-            title: "Phase 1: Agentic Foundations",
+            title: "Phase 1: Agentic Orchestration",
             modules: [
                 {
                     id: "2.1.1",
-                    title: "The Autonomous Loop",
+                    title: "Multi-Agent Orchestration",
                     type: "video",
                     duration: "40m",
                     videoUrl: "https://www.youtube.com/embed/KoJAC3hVr5g",
-                    description: "Moving from Chatbots to Agents. We explore the fundamental 'Thought-Action-Observation' loop that allows AI to behave autonomously. Understand the difference between zero-shot answering and iterative problem solving.",
+                    description: "Moving from Single Agents to Multi-Agent systems. We explore frameworks like LangGraph and CrewAI to let different agents talk to each other to solve complex workflows.",
                     useCases: [
-                        "Designing a research agent that browses the web",
-                        "Building a coding agent that runs and fixes its own code",
-                        "Creating a personal assistant that manages your calendar"
+                        "Designing a research agent that briefs a writer agent",
+                        "Building a coding agent supervised by a QA agent",
+                        "Creating a manager agent that delegates to workers"
                     ],
                     quiz: [
-                        { id: 1, text: "What is the core loop of an agent?", options: ["Input-Output", "Thought-Action-Observation", "Listen-Speak", "Read-Write"], correct: 1 },
-                        { id: 2, text: "What is a 'Tool' in the context of agents?", options: ["A hammer", "A function the agent can call (e.g., search, calculator)", "The computer mouse", "The user"], correct: 1 },
-                        { id: 3, text: "Why do agents need 'Memory'?", options: ["To pass the Turing test", "To maintain context across multiple steps of the loop", "They don't", "To remember your birthday only"], correct: 1 },
-                        { id: 4, text: "What is 'ReAct'?", options: ["A Javascript library", "Reasoning + Acting", "Reaction time", "Reality Action"], correct: 1 },
-                        { id: 5, text: "What creates the risk of infinite loops?", options: ["Bad wifi", "The agent failing to meet its 'Stop' condition", "User error", "Solar flares"], correct: 1 }
+                        { id: 1, text: "What is an advantage of Multi-Agent Systems?", options: ["Lower latency", "Separation of concerns and specialized personas solving sub-tasks", "Less code", "No LLM required"], correct: 1 },
+                        { id: 2, text: "What is LangGraph used for?", options: ["Drawing charts", "Building stateful, multi-actor applications with LLMs modeling cyclical graphs", "Writing CSS", "Database management"], correct: 1 },
+                        { id: 3, text: "Why define a 'Supervisor' agent?", options: ["To yell at other agents", "To route tasks to specialized worker agents and determine when the overall goal is met", "To increase costs", "To look corporate"], correct: 1 },
+                        { id: 4, text: "How do agents communicate in these frameworks?", options: ["By modifying shared state or sending messages to each other", "By emailing each other", "By sending SMS", "They don't communicate"], correct: 0 },
+                        { id: 5, text: "What happens if two agents disagree?", options: ["Infinite loop unless a coordination or consensus mechanism is built", "System crash", "The user decides", "The more expensive model wins"], correct: 0 }
                     ]
                 },
                 {
                     id: "2.1.2",
-                    title: "RAG & Vector Databases",
+                    title: "Autonomous Workflow Design",
                     type: "video",
                     duration: "45m",
                     videoUrl: "https://www.youtube.com/embed/T-D1OfcDW1M",
-                    description: "Retrieval Augmented Generation (RAG) is the bridge between frozen model weights and your private data. Learn how vector embeddings work, how to store them, and how to retrieve relevant context for your agents.",
+                    description: "Learn how to design robust autonomous workflows. Transitioning from simple chains to complex directed acyclic graphs (DAGs) of LLM calls.",
                     useCases: [
-                        "Building a 'Chat with your PDF' app",
-                        "Creating an enterprise knowledge base search",
-                        "Improving hallucination rates by grounding outputs"
+                        "Building autonomous code review pipelines",
+                        "Creating an enterprise knowledge compilation system",
+                        "Improving reliability with conditional routing"
                     ],
                     quiz: [
-                        { id: 1, text: "What does RAG stand for?", options: ["Really Amazing GPT", "Retrieval Augmented Generation", "Random Access Generator", "Red And Green"], correct: 1 },
-                        { id: 2, text: "What is an 'Embedding'?", options: ["A video", "A numerical vector representation of text meaning", "A web link", "A stone"], correct: 1 },
-                        { id: 3, text: "Why use a Vector Database?", options: ["To store images", "To perform semantic search (similarity search)", "To store SQL relations", "To mine bitcoin"], correct: 1 },
-                        { id: 4, text: "Does RAG fine-tune the model?", options: ["Yes", "No, it provides context at inference time", "Maybe", "Only on weekends"], correct: 1 },
-                        { id: 5, text: "What is the 'Context Window'?", options: ["The screen size", "The limit of tokens the model can process at once", "A view outside", "Windows 11"], correct: 1 }
+                        { id: 1, text: "What is conditional routing in workflows?", options: ["A highway system", "Using an LLM decision to choose between different execution branches based on input data", "A router setting", "A CSS trick"], correct: 1 },
+                        { id: 2, text: "What is a DAG?", options: ["A dog breed", "Directed Acyclic Graph, representing a workflow without loops", "Data Analysis Generator", "Digital Art Gallery"], correct: 1 },
+                        { id: 3, text: "Why prefer workflows over pure autonomous agents for production?", options: ["Because they are slower", "Workflows offer predictability, reliability, and guaranteed paths compared to unconstrained agents", "Because they are autonomous", "There is no reason"], correct: 1 },
+                        { id: 4, text: "What is 'human-in-the-loop'?", options: ["A UI element", "A pause in the workflow requiring human approval before the agent takes a critical action", "A coding pattern", "A test"], correct: 1 },
+                        { id: 5, text: "How do you handle agent failure in workflows?", options: ["Give up", "Implement retry logic, fallbacks, and human escalation paths", "Delete the code", "Change the model"], correct: 1 }
                     ]
                 }
             ]
         },
         {
             id: 2,
-            title: "Phase 2: Tools & Capabilities",
+            title: "Phase 2: Tooling & Safety",
             modules: [
                 {
                     id: "2.2.1",
-                    title: "Function Calling Fundamentals",
+                    title: "Agent Safety & Alignment",
                     type: "video",
                     duration: "35m",
                     videoUrl: "https://www.youtube.com/embed/7E-qdsVEoB8",
-                    description: "Agents need hands. Function calling (or Tool Use) allows LLMs to interact with the outside world—sending emails, querying databases, or running calculations. We learn how to define tool schemas and handle model outputs.",
+                    description: "As agents take actions, safety becomes critical. How do you prevent an agent from dropping your database or spending your API budget?",
                     useCases: [
-                        "Connecting an LLM to a SQL database",
-                        "Building a booking assistant that uses a calendar API",
-                        "Creating a data analysis agent that uses Python"
+                        "Implementing read-only modes",
+                        "Using sandboxed execution environments",
+                        "Designing fail-safes and budget caps"
                     ],
                     quiz: [
-                        { id: 1, text: "What is a 'Tool Schema'?", options: ["A database schema", "A JSON description of a function the model can call", "A mental model", "A blueprint"], correct: 1 },
-                        { id: 2, text: "Does the LLM execute the code?", options: ["Yes, inside its weights", "No, it generates the arguments, and the runtime executes them", "Yes, always", "Only in the cloud"], correct: 1 },
-                        { id: 3, text: "What happens after the tool executes?", options: ["The program ends", "The output is fed back to the LLM to generate a final response", "The LLM forgets it", "Nothing"], correct: 1 },
-                        { id: 4, text: "Can an LLM call multiple tools?", options: ["No, only one", "Yes, formatted as a sequence of calls", "Only if paid", "Only on Fridays"], correct: 1 },
-                        { id: 5, text: "What is the biggest risk of tool use?", options: ["Boredom", "The model taking unintended actions (requiring a human-in-the-loop)", "High electricity bill", "None"], correct: 1 }
-                    ]
-                },
-                {
-                    id: "2.2.2",
-                    title: "Building Custom Tools",
-                    type: "video",
-                    duration: "40m",
-                    videoUrl: "https://www.youtube.com/embed/NiLb5DK4_rU",
-                    description: "Theory is great, but practice is better. We build a custom tool from scratch—a 'Stock Price Fetcher' and a 'Sentiment Analyzer'—and wire them into a LangChain agent.",
-                    useCases: [
-                        "Real-time financial dashboard generation",
-                        "Automated customer support ticket tagging",
-                        "Smart home control via natural language"
-                    ],
-                    quiz: [
-                        { id: 1, text: "What distinguishes a Custom Tool from a built-in one?", options: ["It costs more", "You define the logic and the description yourself", "It is faster", "It is slower"], correct: 1 },
-                        { id: 2, text: "Why is the tool description critical?", options: ["It isn't", "It helps the LLM decide WHEN to use the tool", "For documentation only", "For the user"], correct: 1 },
-                        { id: 3, text: "What format are arguments usually passed in?", options: ["XML", "JSON", "Binary", "Plain text"], correct: 1 },
-                        { id: 4, text: "Can tools return files in LangChain?", options: ["Yes", "No", "Maybe", "Only text"], correct: 0 },
-                        { id: 5, text: "What is Pydantic used for?", options: ["Databases", "Data validation for tool inputs", "Web hosting", "Styling"], correct: 1 }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 3,
-            title: "Phase 3: Advanced RAG",
-            modules: [
-                {
-                    id: "2.3.1",
-                    title: "Advanced Retrieval Strategies",
-                    type: "video",
-                    duration: "45m",
-                    videoUrl: "https://www.youtube.com/embed/TRjq7t2Ms5I",
-                    description: "Naive RAG often fails on complex queries. We explore advanced techniques: Hybrid Search (Keyword + Semantic), Parent-Child Indexing, and Re-ranking to drastically improve retrieval quality.",
-                    useCases: [
-                        "Searching legal contracts for specific clauses",
-                        "Medical diagnosis support systems",
-                        "Complex technical troubleshooting bots"
-                    ],
-                    quiz: [
-                        { id: 1, text: "What is 'Hybrid Search'?", options: ["Searching fast", "Combining Keyword (BM25) and Semantic (Vector) search", "Searching two databases", "Google Search"], correct: 1 },
-                        { id: 2, text: "What does a 'Re-ranker' do?", options: ["Sorts results by relevance after retrieval", "Deletes data", "Ranks users", "Nothing"], correct: 0 },
-                        { id: 3, text: "What is the 'Lost in the Middle' phenomenon?", options: ["Getting lost", "LLMs forgetting context in the middle of a large prompt", "Database error", "Network latency"], correct: 1 },
-                        { id: 4, text: "Why chunk text?", options: ["To make it bite-sized for embedding models", "To save space", "To delete it", "No reason"], correct: 0 },
-                        { id: 5, text: "What is 'HyDE'?", options: ["A park", "Hypothetical Document Embeddings", "Hidden Data", "High Yield"], correct: 1 }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 4,
-            title: "Phase 4: Multi-Agent Orchestration",
-            modules: [
-                {
-                    id: "2.4.1",
-                    title: "CrewAI & AutoGen",
-                    type: "video",
-                    duration: "50m",
-                    videoUrl: "https://www.youtube.com/embed/sPzc6hMg7So",
-                    description: "One agent is powerful; a team is unstoppable. We dive into Multi-Agent frameworks like CrewAI and AutoGen. Learn to assign Roles (Researcher, Writer, Manager) and have them collaborate to solve complex tasks.",
-                    useCases: [
-                        "Automated content marketing factory (Trend Watcher -> Writer -> Editor)",
-                        "Software development squad (Product Owner -> Coder -> QA)",
-                        "Complex financial report generation"
-                    ],
-                    quiz: [
-                        { id: 1, text: "What is the benefit of Multi-Agent systems?", options: ["They are cooler", "Specialization and improved performance on complex tasks", "They are cheaper", "They use less RAM"], correct: 1 },
-                        { id: 2, text: "What is a 'Manager' agent?", options: ["The user", "An agent that delegates tasks and reviews work", "A database", "A script"], correct: 1 },
-                        { id: 3, text: "what is 'CrewAI'?", options: ["A boat", "A framework for orchestrating role-playing agents", "A game", "A recruitment agency"], correct: 1 },
-                        { id: 4, text: "How do agents communicate?", options: ["Email", "Through message passing / conversation", "Telepathy", "They don't"], correct: 1 },
-                        { id: 5, text: "Is human-in-the-loop possible in multi-agent systems?", options: ["No", "Yes, to approve critical steps", "Only at the end", "Never"], correct: 1 }
+                        { id: 1, text: "What is the biggest risk of autonomous agents?", options: ["Boredom", "Unintended actions affecting production systems (e.g. deleting data)", "High electricity bill", "None"], correct: 1 },
+                        { id: 2, text: "How do you sandbox an agent's code execution?", options: ["Run it in a Docker container or restricted VM rather than your main server", "Ask the LLM to be safe", "Run it locally", "You can't"], correct: 0 },
+                        { id: 3, text: "What is an 'Allowlist' for agent tools?", options: ["A list of users", "Strictly defining and limiting which endpoints/APIs the agent is permitted to call", "A pricing tier", "A UI feature"], correct: 1 },
+                        { id: 4, text: "Can LLMs suffer from Prompt Injection?", options: ["No", "Yes, malicious user input can trick the agent into misusing its tools", "Only open-source models", "Only if not paid for"], correct: 1 },
+                        { id: 5, text: "What is Budget limit in Agentic systems?", options: ["A salary", "Setting max tokens or max loops to prevent runaway execution costs", "A tax", "A variable"], correct: 1 }
                     ]
                 }
             ]

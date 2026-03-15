@@ -1,18 +1,25 @@
 import { prisma } from "../../../lib/prisma";
-import { getServerSession } from "next-auth";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-    const session = await getServerSession();
-    if (!session || !session.user?.email) {
+    const { userId } = await auth();
+    if (!userId) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     try {
         const body = await request.json();
-        const user = await prisma.user.findUnique({ where: { email: session.user.email } });
-
-        if (!user) return NextResponse.json({ message: "User not found" }, { status: 404 });
+        
+        // Ensure user exists in our DB, since Clerk creates them independently
+        const clerkUser = await currentUser();
+        const email = clerkUser?.emailAddresses[0]?.emailAddress || null;
+        
+        const user = await prisma.user.upsert({
+            where: { id: userId },
+            update: { email: email },
+            create: { id: userId, email: email, name: clerkUser?.firstName || "Student" }
+        });
 
         await prisma.courseProgress.upsert({
             where: { userId: user.id },
@@ -39,14 +46,14 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-    const session = await getServerSession();
-    if (!session || !session.user?.email) {
+    const { userId } = await auth();
+    if (!userId) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     try {
         const user = await prisma.user.findUnique({
-            where: { email: session.user.email },
+            where: { id: userId },
             include: { progress: true }
         });
 

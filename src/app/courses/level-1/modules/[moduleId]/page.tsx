@@ -3,14 +3,14 @@
 import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useSession, signIn } from 'next-auth/react';
+import { useUser } from '@clerk/nextjs';
 
 import { level1Curriculum } from '../../../../../data/curriculum';
 import { useProgress } from '../../../../../hooks/useProgress';
 
 export default function ModulePlayer({ params }: { params: Promise<{ moduleId: string }> }) {
     const router = useRouter();
-    const { data: session, status } = useSession();
+    const { isLoaded, isSignedIn } = useUser();
     const resolvedParams = React.use(params);
     const activeModuleId = resolvedParams.moduleId || "1.1";
     const { saveProgress, isModuleCompleted, getModuleScore } = useProgress();
@@ -28,8 +28,8 @@ export default function ModulePlayer({ params }: { params: Promise<{ moduleId: s
     const [passed, setPassed] = useState(false);
 
     // Authentication Derived State
-    const isAuthenticated = status === "authenticated";
-    const isLoading = status === "loading";
+    const isAuthenticated = isLoaded && isSignedIn;
+    const isLoading = !isLoaded;
 
     // Progress
     const isCompleted = isModuleCompleted(activeModuleId) || passed;
@@ -154,7 +154,7 @@ export default function ModulePlayer({ params }: { params: Promise<{ moduleId: s
                     <div className="flex items-center gap-4">
                         {/* Guest Call Action */}
                         {!isAuthenticated && (
-                            <button onClick={() => signIn()} className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg text-sm font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all">
+                            <button onClick={() => router.push('/sign-in')} className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg text-sm font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all">
                                 Login to Track Progress
                             </button>
                         )}
@@ -199,7 +199,7 @@ export default function ModulePlayer({ params }: { params: Promise<{ moduleId: s
                                         <p className="text-gray-400 mb-6 max-w-sm">
                                             Join Apollo Technologies US to watch this lesson, take the quiz, and earn your verified certificate.
                                         </p>
-                                        <button onClick={() => signIn()} className="px-8 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-full transition-all transform hover:scale-105">
+                                        <button onClick={() => router.push('/sign-in')} className="px-8 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-full transition-all transform hover:scale-105">
                                             Unlock Full Access
                                         </button>
                                     </div>

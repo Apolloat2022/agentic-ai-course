@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 interface AdminLoginModalProps {
@@ -24,18 +23,10 @@ export const AdminLoginModal = ({ isOpen, onClose }: AdminLoginModalProps) => {
         setError("");
 
         try {
-            const result = await signIn("credentials", {
-                redirect: false,
-                username,
-                password,
-            });
-
-            if (result?.error) {
-                setError("Invalid credentials");
-            } else {
-                router.push("/admin/users");
-                onClose();
-            }
+            // With Clerk, we rely on the protection applied to /admin routes.
+            // For now, simply navigate to the protected route.
+            router.push("/admin/users");
+            onClose();
         } catch (err) {
             setError("An error occurred during login");
         } finally {

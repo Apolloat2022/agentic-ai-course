@@ -1,13 +1,13 @@
 'use client';
 
 import React from 'react';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@clerk/nextjs';
 import Link from 'next/link';
 import { level2Curriculum } from '../../../data/curriculum';
 import { useProgress } from '../../../hooks/useProgress';
 
 export default function Level2Overview() {
-    const { data: session } = useSession();
+    const { user } = useUser();
     const { isModuleCompleted } = useProgress();
 
     return (
