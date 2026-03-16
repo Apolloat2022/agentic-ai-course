@@ -72,28 +72,28 @@ export default function PodcastPage() {
             description: "In this session, we dive deep into the art and science of prompt engineering. Learn the specific strategies and techniques to get the most out of large language models."
         },
         {
-            id: "OkLjKA8-xyA",
+            id: "sNvuH-iTi4c",
             number: "EP. 03",
-            title: "Prompt Engineering Mastery: The Ultimate Guide",
-            guest: "Apollo Team",
-            duration: "45:00",
-            description: "Step into the world of professional prompt engineering. This comprehensive guide covers everything from basic instruction to advanced structural patterns."
+            title: "AI Agents in 38 Minutes - Complete Course",
+            guest: "Marina Wyss",
+            duration: "38:00",
+            description: "Complete course from Beginner to Pro covering all the fundamentals you need to know about AI agents."
         },
         {
-            id: "yFMVT3bcrJo",
+            id: "OhI005_aJkA",
             number: "EP. 02",
-            title: "The Architecture of LLMs",
-            guest: "Liam Ottley",
-            duration: "12:45",
-            description: "Understanding the underlying architecture of models like GPT-4 is crucial for designing effective prompts. We explore transformer modules and neural attention."
+            title: "AI Agents for Beginners (Full Course)",
+            guest: "Microsoft Developer",
+            duration: "1:00:00",
+            description: "Lessons 1-10 covering the complete lifecycle and tools for building AI Agents from scratch."
         },
         {
-            id: "5sLYAQS9sWQ",
+            id: "ZaPbP9DwBOE",
             number: "EP. 01",
-            title: "Future of Autonomous Agents",
-            guest: "Dr. Elena Vance",
-            duration: "38:45",
-            description: "Where is AI heading? We discuss the shift from static assistants to autonomous agents that can plan, execute, and refine their own tasks."
+            title: "AI Agent Fundamentals",
+            guest: "KodeKloud",
+            duration: "24:00",
+            description: "Don't learn AI Agents without learning these fundamentals. Explore the shift from static LLMs to autonomous capabilities."
         }
     ];
 

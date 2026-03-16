@@ -38,11 +38,11 @@ export const level1Curriculum: CourseData = {
             modules: [
                 {
                     id: "1.1",
-                    title: "1.1 What is an AI Agent?",
+                    title: "1.1 AI Agent Fundamentals",
                     type: "video",
                     duration: "45m",
-                    videoUrl: "https://www.youtube.com/embed/5sLYAQS9sWQ", 
-                    description: "Understanding the shift from static LLMs to autonomous capable AI. We cover the foundational transition from answering questions to executing multi-step intelligent behaviors.",
+                    videoUrl: "https://www.youtube.com/embed/qU3fmidNbJE", 
+                    description: "AI Agents Fundamentals (The 'Brain vs. Hands' concept). Understanding the shift from static LLMs to autonomous capable AI.",
                     useCases: [
                         "Explaining agentic systems to stakeholders",
                         "Distinguishing between chatbots and agents",
@@ -58,11 +58,11 @@ export const level1Curriculum: CourseData = {
                 },
                 {
                     id: "1.2",
-                    title: "1.2 The ReAct Pattern",
+                    title: "1.2 ReAct: Synergizing Reasoning and Acting in Language Models",
                     type: "video",
                     duration: "25m",
-                    videoUrl: "https://www.youtube.com/embed/yFMVT3bcrJo",
-                    description: "Learn the core ReAct (Reasoning and Acting) pattern. Discover how agents maintain an internal monologue to decide which tools to use and how to evaluate their observations.",
+                    videoUrl: "https://www.youtube.com/embed/Eug2clsLtFs",
+                    description: "This video explains the fundamental paper that allows agents to 'think' before they 'act', which is the precursor to the state management and tool use.",
                     useCases: [
                         "Building a multi-step research agent",
                         "Debugging logic loops in LLMs",
@@ -84,11 +84,11 @@ export const level1Curriculum: CourseData = {
             modules: [
                 {
                     id: "2.1",
-                    title: "2.1 Agent State Management",
+                    title: "2.1 AI Agents Complete Course",
                     type: "video",
-                    duration: "30m",
-                    videoUrl: "https://www.youtube.com/embed/Dep2-Rtl4Ow", 
-                    description: "Agents need memory to keep track of their progress across multiple reasoning steps. We explore short-term context windows versus long-term vector database storage.",
+                    duration: "38m",
+                    videoUrl: "https://www.youtube.com/embed/sNvuH-iTi4c", 
+                    description: "AI Agents in 38 Minutes - Complete Course from Beginner to Pro. Agents need memory to keep track of their progress across multiple reasoning steps.",
                     useCases: [
                         "Creating agents that remember past conversations",
                         "Implementing state machines for complex workflows",
@@ -103,23 +103,88 @@ export const level1Curriculum: CourseData = {
                     ]
                 },
                 {
-                    id: "2.2",
-                    title: "2.2 Tool Use & Function Calling",
+                    id: "2.2.1",
+                    title: "2.2.1 The Conceptual Foundation",
+                    type: "video",
+                    duration: "30m",
+                    videoUrl: "https://www.youtube.com/embed/ItQzJ26NwrM",
+                    description: "How Agentic AI Calls Tools | Why LLMs Don’t Act Alone. Learn why the LLM doesn't call tools directly and understand the 'Request-Response' loop and the 'Firewall' concept.",
+                    useCases: [
+                        "Explaining tool connectivity to stakeholders",
+                        "Designing Human-in-the-Loop safety gates",
+                        "Understanding network security in AI"
+                    ],
+                    quiz: [
+                        { id: 1, text: "Who actually executes the tool in an agentic system?", options: ["The LLM weights", "The surrounding application runtime firewalling the model", "The database", "The user directly"], correct: 1 }
+                    ]
+                },
+                {
+                    id: "2.2.2",
+                    title: "2.2.2 The Technical Blueprint",
                     type: "video",
                     duration: "40m",
-                    videoUrl: "https://www.youtube.com/embed/Fp-ue4UCE3s", 
-                    description: "Learn how to endow an LLM with 'hands'. We will cover defining JSON schemas for function calling, letting your agent fetch live weather, stock prices, or query a database.",
+                    videoUrl: "https://www.youtube.com/embed/VdzgZiOq3Uc", 
+                    description: "Understanding the JSON schemas and the data structure of a function call. This video specifically focuses on the 'bridge' between the prompt and the external API.",
                     useCases: [
-                        "Building agents that interact with APIs",
-                        "Executing code autonomously",
-                        "Writing dynamic dashboards"
+                        "Building JSON schemas for AI",
+                        "Executing code autonomously"
                     ],
                     quiz: [
                         { id: 1, text: "What is tool use in agents?", options: ["Using a hammer", "Allowing the LLM to output structured JSON to trigger external code execution", "Typing fast", "Using keyboard shortcuts"], correct: 1 },
-                        { id: 2, text: "Who executes the tool?", options: ["The LLM weights", "The surrounding application runtime (e.g., Python/Node server) based on the LLM's structured output", "The user", "The cloud provider"], correct: 1 },
-                        { id: 3, text: "Why are Tool Schemas important?", options: ["For aesthetics", "They define exactly what arguments the function expects so the LLM can format its request correctly", "For pricing", "For speed"], correct: 1 },
-                        { id: 4, text: "Can an agent call multiple tools in parallel?", options: ["No, never", "Yes, modern models support parallel function calling", "Only on Sundays", "Only in Java"], correct: 1 },
-                        { id: 5, text: "What happens if a tool returns an error?", options: ["The agent crashes instantly", "The error is returned to the agent as an observation so it can correct its mistake", "The user is banned", "The database drops"], correct: 1 }
+                        { id: 2, text: "Why are Tool Schemas important?", options: ["For aesthetics", "They define exactly what arguments the function expects so the LLM can format its request correctly", "For pricing", "For speed"], correct: 1 },
+                        { id: 3, text: "What happens if a tool returns an error?", options: ["The agent crashes instantly", "The error is returned to the agent as an observation so it can correct its mistake", "The user is banned", "The database drops"], correct: 1 }
+                    ]
+                },
+                {
+                    id: "2.2.3",
+                    title: "2.2.3 The Routing Logic",
+                    type: "video",
+                    duration: "25m",
+                    videoUrl: "https://www.youtube.com/embed/Bb_rGf23Fmo",
+                    description: "Multi-Agent Orchestration & Routing. How an agent decides which tool to use when it has multiple options. Learn about intent classification and semantic routing within workflows.",
+                    useCases: [
+                        "Routing queries to the right tools",
+                        "Building multi-tool agents"
+                    ],
+                    quiz: [
+                        { id: 1, text: "What is routing in an agent workflow?", options: ["IP routing", "Choosing the correct tool based on the user's intent and tool description", "Running all tools at once", "A hardware switch"], correct: 1 }
+                    ]
+                },
+                {
+                    id: "2.2.4",
+                    title: "2.2.4 The Future Standard (MCP)",
+                    type: "video",
+                    duration: "30m",
+                    videoUrl: "https://www.youtube.com/embed/6HCplP-Tn3k",
+                    description: "Using the Model Context Protocol (MCP) to connect tools without custom code. Explore the future of standardized tool connectivity.",
+                    useCases: [
+                        "Standardizing tool integrations",
+                        "Connecting enterprise APIs easily"
+                    ],
+                    quiz: [
+                        { id: 1, text: "What does MCP stand for in the context of tool connection?", options: ["Multi-Cloud Provider", "Model Context Protocol", "Main Central Processor", "Master Code Pattern"], correct: 1 }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 3,
+            title: "Week 3: No-Code Agent Development",
+            modules: [
+                {
+                    id: "3.1",
+                    title: "3.1 Building AI Agents with No-Code Tools",
+                    type: "video",
+                    duration: "45m",
+                    videoUrl: "https://www.youtube.com/embed/DV0Ln7HRyJQ",
+                    description: "Zero To Your First AI Agent (n8n Tutorial). Learn to build agents visually using No-Code/Low-Code tools before diving into Python/Next.js code.",
+                    useCases: [
+                        "Visualizing agent workflows",
+                        "Rapid prototyping",
+                        "Building AI with no programming experience"
+                    ],
+                    quiz: [
+                        { id: 1, text: "What is an advantage of No-Code AI tools?", options: ["They require deep programming knowledge", "They allow visual building and rapid prototyping", "They only support text output", "They are slower than coding from scratch"], correct: 1 }
                     ]
                 }
             ]
@@ -135,6 +200,21 @@ export const level2Curriculum: CourseData = {
             id: 1,
             title: "Phase 1: Agentic Orchestration",
             modules: [
+                {
+                    id: "2.0.1",
+                    title: "Prompt Engineering vs. Agentic Workflow",
+                    type: "video",
+                    duration: "20m",
+                    videoUrl: "https://www.youtube.com/embed/sal78ACtGTc",
+                    description: "A high-level conceptual overview by Andrew Ng explaining why moving from one-shot prompting to iterative agentic loops is a critical shift.",
+                    useCases: [
+                        "Differentiating prompting from autonomous flows",
+                        "Designing iterative agentic loops"
+                    ],
+                    quiz: [
+                        { id: 1, text: "What is the key difference between prompt engineering and agentic workflows?", options: ["Agentic workflows are slower", "Agentic workflows use iterative loops instead of one-shot prompting", "Prompt engineering requires coding", "There is no difference"], correct: 1 }
+                    ]
+                },
                 {
                     id: "2.1.1",
                     title: "Multi-Agent Orchestration",
@@ -199,6 +279,28 @@ export const level2Curriculum: CourseData = {
                         { id: 3, text: "What is an 'Allowlist' for agent tools?", options: ["A list of users", "Strictly defining and limiting which endpoints/APIs the agent is permitted to call", "A pricing tier", "A UI feature"], correct: 1 },
                         { id: 4, text: "Can LLMs suffer from Prompt Injection?", options: ["No", "Yes, malicious user input can trick the agent into misusing its tools", "Only open-source models", "Only if not paid for"], correct: 1 },
                         { id: 5, text: "What is Budget limit in Agentic systems?", options: ["A salary", "Setting max tokens or max loops to prevent runaway execution costs", "A tax", "A variable"], correct: 1 }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 3,
+            title: "Phase 3: RAG Pipelines",
+            modules: [
+                {
+                    id: "2.3.1",
+                    title: "Advanced RAG: Contextual Retrieval",
+                    type: "video",
+                    duration: "30m",
+                    videoUrl: "https://www.youtube.com/embed/0_f8_y9XpAk",
+                    description: "Learn Contextual Retrieval, a standard for ensuring agents don't lose information during chunking. Essential for robust RAG pipelines.",
+                    useCases: [
+                        "Preventing information loss during chunking",
+                        "Building robust RAG for production",
+                        "Improving vector search accuracy"
+                    ],
+                    quiz: [
+                        { id: 1, text: "Why is Contextual Retrieval important?", options: ["It uses less storage", "It ensures agents don't lose information contextual meaning during chunking", "It bypasses vector DBs", "It makes models faster"], correct: 1 }
                     ]
                 }
             ]
