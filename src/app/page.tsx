@@ -98,7 +98,7 @@ export default function HomePage() {
             <span className="text-cyan-400">Cognitive Toolkit?</span>
           </h2>
           <a
-            href="/login"
+            href="/dashboard"
             className="inline-block px-12 py-5 text-lg font-bold rounded-full bg-white text-black hover:bg-gray-200 hover:scale-105 transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)]"
           >
             Get Started
