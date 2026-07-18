@@ -7,7 +7,7 @@ A cinematic, high-performance learning platform for IT Professionals to master P
 - **Framework**: Next.js 14 (App Router)
 - **Styling**: Tailwind CSS, Custom Animations
 - **State Management**: React Hooks + LocalStorage Persistence
-- **Auth**: NextAuth.js (Client-side integration)
+- **Auth**: Clerk
 - **Deployment**: Serverless Ready (Vercel/Netlify compatible)
 
 ## 🌟 Key Features
