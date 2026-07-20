@@ -35,6 +35,17 @@ Neither is referenced by the current Prisma config. They're orphaned leftovers f
 3. Rotate the Neon Postgres password and the Clerk secret key that were committed in `.env.local`, since both are recoverable from git history even after the file is removed from the current tree — a `git rm` alone does not scrub history. If history rewriting (`git filter-repo`/BFG) is warranted, that's a decision for the repo owner, not something to do silently in a later session without sign-off.
 4. Re-verify after cleanup that `prisma generate`/`prisma db push` still succeed against the real Neon Postgres instance (the `postinstall` script already runs `prisma generate` automatically on `npm install`).
 
+**Status update 2026-07-19:** Steps 1-2 are done — commit `29fbc7e` ("Fix credential exposure: untrack .env.local and dev.db files") untracked both `dev.db` files and `.env.local`, and it's pushed (`origin/master` in sync). **Step 3 (credential rotation) is still outstanding** and is now confirmed urgent, not just precautionary: `github.com/Apolloat2022/agentic-ai-course` is a **public** repo, so the credentials below are visible to anyone right now via the repo's commit history (`86d7b97`, `424dc61`, `0e8addd` all still contain `.env.local` in full).
+
+**Action needed — rotate these, on the provider dashboards (not doable from this repo):**
+- **Clerk** (dashboard.clerk.com) — roll the secret key on whichever of these two projects is actually in use:
+  - Project `mutual-macaw-22`: `sk_test_Lp5LqXhZMBgW3l8u8zB8y7Rk6d0w1P5mN9aG5cJ8bP`
+  - Project `pleasing-satyr-46`: `sk_test_r5TR9QxyIVfGJAyKAVno5e8ItoHKKdMgClUNZx4Upj`
+  - (Publishable keys `pk_test_...` are not secret and don't need rotating.)
+- **Neon** (console.neon.tech) — reset the `neondb_owner` password on the project owning host `ep-twilight-cherry-adtzq5xk-pooler.c-2.us-east-1.aws.neon.tech` (leaked password: `npg_Eeuirtv1MDq6`).
+- After rotating both, update the real (local, untracked) `.env.local` with the new values so the app keeps working.
+- History rewrite was considered and explicitly declined by the repo owner — rotation alone is the agreed remediation, not a history purge.
+
 ## Suggested order of work
 
 Item 1 (doc fix) is a one-line README change, do it first. Item 2's cleanup (steps 1-2) is mechanical and should happen next; step 3 (credential rotation) is the most important part of item 2 and should not be skipped just because it's inconvenient — committed real database credentials are a live exposure, not a hygiene nit.
